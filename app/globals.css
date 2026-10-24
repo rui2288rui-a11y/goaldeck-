@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------
+   カラートークン（R G B をスペース区切りで保持 → Tailwind の /opacity が効く）
+   ------------------------------------------------------------ */
+:root {
+  --canvas: 244 245 252;
+  --surface: 255 255 255;
+  --surface2: 240 242 250;
+  --line: 226 230 243;
+  --ink: 20 24 46;
+  --muted: 100 108 138;
+  --brand: 79 70 229;
+  --brand2: 192 38 211;
+  --accent: 202 110 4;
+  --good: 5 150 105;
+  --bad: 225 29 72;
+  color-scheme: light;
+}
+
+.dark {
+  --canvas: 9 11 22;
+  --surface: 18 21 40;
+  --surface2: 27 31 56;
+  --line: 40 45 78;
+  --ink: 236 239 252;
+  --muted: 143 151 184;
+  --brand: 129 140 248;
+  --brand2: 232 121 249;
+  --accent: 251 191 36;
+  --good: 52 211 153;
+  --bad: 251 113 133;
+  color-scheme: dark;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-canvas text-ink antialiased;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.25s ease;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--line)) transparent;
+}
+
+/* number input のスピナーを消す（スマホでも見た目が崩れない） */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* グラフの軸・グリッドをテーマ色に */
+.recharts-cartesian-axis-tick-value {
+  fill: rgb(var(--muted));
+  font-size: 11px;
+}
+.recharts-cartesian-grid line {
+  stroke: rgb(var(--line));
+}
+.recharts-wrapper,
+.recharts-surface {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
